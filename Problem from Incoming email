@@ -1,0 +1,24 @@
+current.caller_id = gs.getUserID();
+//current.comments = "received from: " + email.origemail + "\n\n" + email.body_text;
+current.short_description = email.subject;
+
+//current.category = "inquiry";
+current.state = "New";
+current.notify = "2";
+current.priority = "5";
+
+if (email.body.description != undefined)
+   current.description = email.body.description;
+
+if (email.body.assign != undefined)
+   current.assigned_to = email.body.assign;
+
+if (email.importance != undefined) {
+   if (email.importance.toLowerCase() == "high")
+      current.priority = 1;
+}
+
+//if (email.body.priority != undefined) 
+  // current.priority = email.body.priority;
+
+current.insert();
